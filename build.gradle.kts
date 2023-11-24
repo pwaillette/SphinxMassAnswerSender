@@ -16,6 +16,7 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-engine:5.10.0")
 
     implementation("org.seleniumhq.selenium:selenium-chrome-driver:4.15.0")
+    implementation("org.seleniumhq.selenium:selenium-support:4.15.0")
     implementation("org.apache.poi:poi:5.2.4")
     implementation("org.apache.poi:poi-ooxml:5.2.4")
 }

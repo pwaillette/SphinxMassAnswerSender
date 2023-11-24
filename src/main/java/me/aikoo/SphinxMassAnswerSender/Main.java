@@ -11,12 +11,13 @@ public class Main {
 
     private static Scanner scanner = null;
     public static void main(String[] args) throws IOException {
-        // WebDriver driver = new ChromeDriver();
+        WebDriver driver = new ChromeDriver();
         scanner = new Scanner(System.in);
         String url = getSphinxSurveyURL();
         File excelFile = getExcelFile();
         scanner.close();
-        SphinxSender sender = new SphinxSender(null, excelFile, url);
+        SphinxSender sender = new SphinxSender(driver, excelFile, url);
+        sender.sendAnswers();
     }
 
     private static String getSphinxSurveyURL() {

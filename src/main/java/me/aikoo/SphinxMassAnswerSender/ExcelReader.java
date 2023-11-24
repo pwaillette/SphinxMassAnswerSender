@@ -16,10 +16,11 @@ public class ExcelReader {
         this.workbook = WorkbookFactory.create(this.excelFile);
         System.out.println("Workbook has " + workbook.getNumberOfSheets() + " Sheets : ");
         this.parseQuestionsFormat();
+        this.workbook.close();
     }
 
     private void parseQuestionsFormat() {
-        Sheet sheet = workbook.getSheetAt(1);
+        Sheet sheet = workbook.getSheetAt(1); // The second one
 
         // The questions start from B15
         int startingRow = 14;
@@ -66,5 +67,9 @@ public class ExcelReader {
 
             currentRow++;
         }
+    }
+
+    public Map<String, ArrayList<String>> getPossibleQuestionAndAnswers() {
+        return possibleQuestionAndAnswers;
     }
 }
