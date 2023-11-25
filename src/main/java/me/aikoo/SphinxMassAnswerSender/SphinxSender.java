@@ -4,11 +4,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
 import java.io.IOException;
-import java.time.Duration;
 import java.util.List;
 
 public class SphinxSender {
@@ -45,7 +43,7 @@ public class SphinxSender {
             questionsElements = driver.findElements(By.className("question"));
 
             for (WebElement questionElement : questionsElements) {
-                List<WebElement> choicesElements = questionElement.findElements(By.cssSelector("input[type=radio]")); // BUG: Deuxièmepage = 0 length
+                List<WebElement> choicesElements = questionElement.findElements(By.cssSelector("input[type=radio]"));
                 if (choicesElements.size() == 0) {
                     choicesElements = questionElement.findElements(By.cssSelector("input[type=checkbox]"));
                 }
@@ -70,23 +68,7 @@ public class SphinxSender {
     }
 
     private void fillQuestionPage(WebElement questionElement, List<WebElement> choicesElements) {
-        WebElement questionTitleElement = questionElement.findElement(By.tagName("h3"));
-        String questionTitle = questionTitleElement.getText();
-        System.out.println("Question: " + questionTitle);
-
-        for (WebElement choiceElement : choicesElements) {
-            if (choiceElement.getAttribute("type").equals("text")) {
-                System.out.println("Input choice.");
-            } else {
-                System.out.println("Choice: " + choiceElement);
-                String choiceValue = choiceElement.getAttribute("value");
-                String choiceLabel = choiceElement.findElement(By.xpath("following-sibling::label")).getText();
-                System.out.println("Choice Value: " + choiceValue + ", Choice Label: " + choiceLabel);
-            }
-        }
-
         if (choicesElements.get(0).getAttribute("type").equals("text")) {
-            System.out.println("Input choice !!!!");
             if (choicesElements.get(0).getAttribute("role").equals("spinbutton")) {
                 choicesElements.get(0).sendKeys("6");
             } else {
