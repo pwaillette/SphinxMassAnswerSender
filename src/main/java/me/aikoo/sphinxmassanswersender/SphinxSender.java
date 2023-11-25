@@ -1,8 +1,7 @@
-package me.aikoo.SphinxMassAnswerSender;
+package me.aikoo.sphinxmassanswersender;
 
 import java.io.File;
 import java.io.IOException;
-import java.sql.Timestamp;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

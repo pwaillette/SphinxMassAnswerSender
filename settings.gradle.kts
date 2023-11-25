@@ -1,2 +1,2 @@
-rootProject.name = "SphinxMassAnswerSender"
+rootProject.name = "sphinxmassanswersender"
 

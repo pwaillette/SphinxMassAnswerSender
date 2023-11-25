@@ -1,4 +1,4 @@
-package me.aikoo.SphinxMassAnswerSender;
+package me.aikoo.sphinxmassanswersender;
 
 import java.io.File;
 import java.io.IOException;

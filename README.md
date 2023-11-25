@@ -12,12 +12,13 @@ SphinxMassAnswerSender is a Java project designed to automate the process of ans
 
 ## Getting Started 🚦
 
-1. Download the latest jar file from the [releases](https://github.com/Aikoo-Sama/SphinxMassAnswerSender/releases/latest) page.
-2. Download Java 19 from the [official website](https://www.oracle.com/java/technologies/javase/jdk19-archive-downloads.html) and install it.
-3. Open a terminal and navigate to the directory where the jar file is located.
-4. Run the following command: `java -jar SphinxMassAnswerSender.jar`
-5. Follow the instructions on the screen
-6. Enjoy!
+1. Set up your Excel file [USING THIS FILE](SETUP_EXCEL.md)
+2. Download the latest jar file from the [releases](https://github.com/Aikoo-Sama/SphinxMassAnswerSender/releases/latest) page.
+3. Download Java 19 from the [official website](https://www.oracle.com/java/technologies/javase/jdk19-archive-downloads.html) and install it.
+4. Open a terminal and navigate to the directory where the jar file is located.
+5. Run the following command: `java -jar SphinxMassAnswerSender.jar`
+6. Follow the instructions on the screen
+7. Enjoy!
 
 ## To Do List 📝
 
