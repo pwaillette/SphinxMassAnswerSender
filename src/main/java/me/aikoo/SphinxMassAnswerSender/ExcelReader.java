@@ -18,7 +18,6 @@ public class ExcelReader {
         System.out.println("Workbook has " + workbook.getNumberOfSheets() + " Sheets : ");
         this.parseQuestionsFormat();
         this.loadAnswersToFill();
-
         this.workbook.close();
     }
 
@@ -51,7 +50,7 @@ public class ExcelReader {
 
             for (int cellIndex = 1; cellIndex < row.getLastCellNum(); cellIndex++) {
                 Cell answerCell = row.getCell(cellIndex);
-                String question = sheet.getRow(0).getCell(cellIndex).getStringCellValue();
+                String question = sheet.getRow(1).getCell(cellIndex).getStringCellValue();
                 String answer = dataFormatter.formatCellValue(answerCell);
 
                 String[] forbiddenQuestions = {"CLE", "DATE_SAISIE", "DATE_ENREG", "DATE_MODIF", "TEMPS_SAISIE", "ORIGINE_SAISIE", "LANG_SAISIE", "APPAREIL_SAISIE", "PROGRESSION", "DERNIERE_QUESTION_SAISIE"};
@@ -60,7 +59,11 @@ public class ExcelReader {
                     continue;
                 }
 
-                answers.put(question, answer);
+                if (question.matches(".*_\\d+$")) {
+                    question = question.replaceAll("_\\d+$", "");
+                    String s = answers.get(question);
+                    answers.put(question, ((s != null && s.startsWith("MULTIPLE_ANSWERS:")) ? "" : "MULTIPLE_ANSWERS:") + (s != null ? s : "") + (answer != null && !answer.isEmpty() ? answer + ";" : ""));
+                } else answers.put(question, answer);
             }
 
             answersToFill.put(lineNumber, answers);
@@ -137,5 +140,9 @@ public class ExcelReader {
 
     public Map<String, ArrayList<String>> getPossibleQuestionAndAnswers() {
         return possibleQuestionAndAnswers;
+    }
+
+    public Map<Integer, HashMap<String, String>> getAnswersToFill() {
+        return answersToFill;
     }
 }
