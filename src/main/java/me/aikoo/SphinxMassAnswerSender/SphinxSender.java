@@ -34,7 +34,12 @@ public class SphinxSender {
             try {
                 submitButton = driver.findElement(By.cssSelector("button[type=submit][data-action=next]"));
             } catch (Exception e) {
-                break;
+                try {
+                    submitButton = driver.findElement(By.cssSelector("button[type=submit][data-action=save]"));
+                } catch (Exception e2) {
+                    System.out.println("No submit button found.");
+                    break;
+                }
             }
 
             questionsElements = driver.findElements(By.className("question"));
@@ -70,15 +75,20 @@ public class SphinxSender {
         System.out.println("Question: " + questionTitle);
 
         for (WebElement choiceElement : choicesElements) {
-            System.out.println("Choice: " + choiceElement);
-            String choiceValue = choiceElement.getAttribute("value");
-            String choiceLabel = choiceElement.findElement(By.xpath("following-sibling::label")).getText();
-            System.out.println("Choice Value: " + choiceValue + ", Choice Label: " + choiceLabel);
+            if (choiceElement.getAttribute("type").equals("text")) {
+                System.out.println("Input choice.");
+            } else {
+                System.out.println("Choice: " + choiceElement);
+                String choiceValue = choiceElement.getAttribute("value");
+                String choiceLabel = choiceElement.findElement(By.xpath("following-sibling::label")).getText();
+                System.out.println("Choice Value: " + choiceValue + ", Choice Label: " + choiceLabel);
+            }
         }
 
-        if (choicesElements.size() == 1 && choicesElements.get(0).getAttribute("type").equals("text")) {
+        if (choicesElements.get(0).getAttribute("type").equals("text")) {
+            System.out.println("Input choice !!!!");
             if (choicesElements.get(0).getAttribute("role").equals("spinbutton")) {
-                choicesElements.get(0).sendKeys("1");
+                choicesElements.get(0).sendKeys("6");
             } else {
                 choicesElements.get(0).sendKeys("test");
             }
