@@ -41,11 +41,16 @@ public class SphinxSender {
 
             for (WebElement questionElement : questionsElements) {
                 List<WebElement> choicesElements = questionElement.findElements(By.cssSelector("input[type=radio]")); // BUG: Deuxièmepage = 0 length
-
-                System.out.println("Choices: " + choicesElements.size());
                 if (choicesElements.size() == 0) {
                     choicesElements = questionElement.findElements(By.cssSelector("input[type=checkbox]"));
                 }
+
+                // If type is input
+                if (choicesElements.size() == 0) {
+                    choicesElements = questionElement.findElements(By.cssSelector("input[type=text]"));
+                }
+
+                System.out.println("Choices: " + choicesElements.size());
 
                 fillQuestionPage(questionElement, choicesElements);
             }
@@ -71,7 +76,13 @@ public class SphinxSender {
             System.out.println("Choice Value: " + choiceValue + ", Choice Label: " + choiceLabel);
         }
 
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", choicesElements.get(0));
+        if (choicesElements.size() == 1 && choicesElements.get(0).getAttribute("type").equals("text")) {
+            if (choicesElements.get(0).getAttribute("role").equals("spinbutton")) {
+                choicesElements.get(0).sendKeys("1");
+            } else {
+                choicesElements.get(0).sendKeys("test");
+            }
+        } else ((JavascriptExecutor) driver).executeScript("arguments[0].click();", choicesElements.get(0));
 
         try {
             Thread.sleep(700);
