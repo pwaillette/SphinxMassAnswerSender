@@ -31,9 +31,8 @@ public class SphinxSender {
         WebElement submitButton;
 
         do {
-
             try {
-                submitButton = driver.findElement(By.cssSelector("button[type=submit]"));
+                submitButton = driver.findElement(By.cssSelector("button[type=submit][data-action=next]"));
             } catch (Exception e) {
                 break;
             }
@@ -42,6 +41,12 @@ public class SphinxSender {
 
             for (WebElement questionElement : questionsElements) {
                 List<WebElement> choicesElements = questionElement.findElements(By.cssSelector("input[type=radio]")); // BUG: Deuxièmepage = 0 length
+
+                System.out.println("Choices: " + choicesElements.size());
+                if (choicesElements.size() == 0) {
+                    choicesElements = questionElement.findElements(By.cssSelector("input[type=checkbox]"));
+                }
+
                 fillQuestionPage(questionElement, choicesElements);
             }
 
