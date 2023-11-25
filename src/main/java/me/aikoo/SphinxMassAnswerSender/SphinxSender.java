@@ -84,7 +84,7 @@ public class SphinxSender {
 
     private void fillQuestion(Integer observationNumber, WebElement questionElement, List<WebElement> choicesElements) {
         WebElement questionTitleElement = questionElement.findElement(By.tagName("h3"));
-        String questionTitle = questionTitleElement.getText();
+        String questionTitle = questionTitleElement.getText().replaceAll("_", "\n");
 
         this.logObservation(observationNumber, "--------------------------------------------------");
         this.logObservation(observationNumber, "Filling question: " + questionTitle);
@@ -106,16 +106,30 @@ public class SphinxSender {
                         System.exit(0);
                     }
 
-                    choiceElement.sendKeys(answer);
+                    Integer answerInt = Integer.parseInt(answer);
+                    WebElement spanUpElement = questionElement.findElement(By.cssSelector("span[aria-label='Augmenter valeur']"));
+
+                    for (int i = 0; i < answerInt; i++) {
+                        if (!choiceElement.getAttribute("title").equals("") && Integer.parseInt(choiceElement.getAttribute("title")) == answerInt) {
+                            break;
+                        }
+
+                        spanUpElement.click();
+
+                        try {
+                            Thread.sleep(200);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
                 } else {
-                    choiceElement.sendKeys(answer);
+                    choiceElement.sendKeys(answer.split("(?!^)"));
                 }
             } else if (choiceElement.getAttribute("type").equals("radio") || choiceElement.getAttribute("type").equals("checkbox")) {
                 WebElement labelElement = questionElement.findElement(By.cssSelector("label[for='" + choiceElement.getAttribute("id") + "']"));
                 WebElement spanElement = labelElement.findElement(By.tagName("span"));
 
-                System.out.println(answer);
-                System.out.println(isMultipleAnswer(answer, spanElement.getText()));
+                answer = answer.replace("Item", "");
                 if (spanElement.getText().equals(answer) || isMultipleAnswer(answer, spanElement.getText())) {
                     ((org.openqa.selenium.JavascriptExecutor) driver).executeScript("arguments[0].click();", choiceElement);
                 }

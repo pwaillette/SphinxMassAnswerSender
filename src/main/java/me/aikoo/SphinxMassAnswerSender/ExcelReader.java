@@ -60,10 +60,10 @@ public class ExcelReader {
                 }
 
                 if (question.matches(".*_\\d+$")) {
-                    question = question.replaceAll("_\\d+$", "");
+                    question = question.replaceAll("_\\d+$", "").replaceAll("_", "\n");
                     String s = answers.get(question);
                     answers.put(question, ((s != null && s.startsWith("MULTIPLE_ANSWERS:")) ? "" : "MULTIPLE_ANSWERS:") + (s != null ? s : "") + (answer != null && !answer.isEmpty() ? answer + ";" : ""));
-                } else answers.put(question, answer);
+                } else answers.put(question.replaceAll("_", "\n"), answer);
             }
 
             answersToFill.put(lineNumber, answers);
