@@ -20,10 +20,6 @@ SphinxMassAnswerSender is a Java project designed to automate the process of ans
 6. Follow the instructions on the screen
 7. Enjoy!
 
-## To Do List 📝
-
-- [ ] Use AI to intelligently answer survey questions.
-
 ## Author 🧑‍💻
 
 This project is proudly developed by [Léa Gerard](https://github.com/Aikoo-Sama), aka Aikoo-Sama.
