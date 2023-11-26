@@ -38,4 +38,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Disclaimer ⚠️🚨
 
-I, Léa Gérard, declare to have carried out this project of transferring paper data to the Sphinx software. Under no circumstances are this project and I responsible for the validity and reality of its data, and we do not collect any data from users of this project. Users are responsible for their use of this project.
+I, Léa Gérard, declare to have carried out this project of transferring paper data to the Sphinx software. Under no circumstances are this project and I responsible for the validity and reality of its data, data provided to the program via the Excel file in particular, and we do not collect any data from users of this project. Users are responsible for their use of this project.
