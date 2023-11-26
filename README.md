@@ -35,3 +35,7 @@ Contributions are welcome! Feel free to fork and submit pull requests.
 ## License 📄
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Disclaimer ⚠️🚨
+
+I, Léa Gérard, declare to have carried out this project of transferring paper data to the Sphinx software. Under no circumstances are this project and I responsible for the validity and reality of its data, and we do not collect any data from users of this project. Users are responsible for their use of this project.
